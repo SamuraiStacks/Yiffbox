@@ -11,7 +11,9 @@ These are basically the options that you have to use to run Yiffbox. They start 
 An example would be `--coolness 9000`, or `--new`
 
 Certain command flags require arguments for them. Those in `<>` are required, and others in `[]` are only needed if you want them to be.
+
 `rating <Rating>` - The rating of content you want (Safe, Questionable, Explicit). **This is required.**
+
 `tags <Tag> [Another Tag]` - Tag(s) to use to search for. You use them if you want a specific thing. **At least 1 tag is required.**
 
 
