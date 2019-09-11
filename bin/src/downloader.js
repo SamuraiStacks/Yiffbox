@@ -43,10 +43,6 @@ module.exports = async (rating, tags) => {
         });
     }
 
-    function dlpercent(gotten, size) {
-	    return progress = (gotten * 100) / size;
-	}
-    
     function drawBar(gotten, total) {
         const progress = gotten / total
         const barlength = process.stdout.columns - 60
@@ -56,7 +52,7 @@ module.exports = async (rating, tags) => {
 
         const filledbar = get_bar(fillbarlength, " ", chalk.bgWhite)
         const emptybar = get_bar(emptybarlength, "=")
-        const percent = `${progress.toFixed(2)}%`
+        const percent = `${(progress * 100).toFixed(2)}%`
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
