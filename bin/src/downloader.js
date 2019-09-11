@@ -4,6 +4,7 @@ module.exports = async (rating, tags) => {
 	const fetch = require("node-fetch")
 	const writeDir = `${require('os').userInfo().homedir}/Documents/Yiffbox/e621-${rating}/${tags}`
 	const mkdirp = require("mkdirp")
+    const chalk = require("chalk")
 	mkdirp(writeDir, (err) => {
 		if(err) throw err;
 
@@ -48,23 +49,23 @@ module.exports = async (rating, tags) => {
     
     function drawBar(gotten, total, _progress) {
         const progress = gotten / total
-        const fillbarlength = (progress * (process.stdout.columns - 50)).toFixed(0)
-        const emptybarlength = (process.stdout.columns - 50) - fillbarlength
+        const fillbarlength = (progress * (process.stdout.columns - 60)).toFixed(0)
+        const emptybarlength = (process.stdout.columns - 60) - fillbarlength
 
-        const filledbar = get_bar(fillbarlength, " ")
+        const filledbar = get_bar(fillbarlength, " ", chalk.bgWhite)
         const emptybar = get_bar(emptybarlength, " ")
         const percent = progress
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
-        process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${_progress}`)
+        process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${_progress}%`)
 
-        function get_bar(length, char) {
+        function get_bar(length, char, color = a => a) {
             let str = ""
             for(let i = 0; i < length; i++) {
                 str += char;
             }
-            return str
+            return color(str)
         }    
     }
 }
