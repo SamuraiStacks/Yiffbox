@@ -56,7 +56,7 @@ module.exports = async (rating, tags) => {
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
-        process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${percent}`)
+        process.stdout.write(`\tDownloading [${filledbar}${emptybar}] | percent: ${percent}`)
 
         function get_bar(length, char, color = a => a) {
             let str = ""
