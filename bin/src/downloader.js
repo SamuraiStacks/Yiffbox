@@ -35,7 +35,7 @@ module.exports = async (rating, tags) => {
             res.body.on("data", (chunk) => {
             	gotten += chunk.length
             	// console.log(r.headers.get('content-length'))
-                drawBar(gotten, r.headers.get("content-length"), dlpercent(gotten, r.headers.get("content-length")))
+                drawBar(gotten, r.headers.get("content-length"))
             })
         	fileStream.on("finish", function() {
             	resolve();
@@ -47,18 +47,20 @@ module.exports = async (rating, tags) => {
 	    return progress = (gotten * 100) / size;
 	}
     
-    function drawBar(gotten, total, _progress) {
+    function drawBar(gotten, total) {
         const progress = gotten / total
-        const fillbarlength = (progress * (process.stdout.columns - 60)).toFixed(0)
-        const emptybarlength = (process.stdout.columns - 60) - fillbarlength
+        const barlength = process.stdout.columns - 60
+
+        const fillbarlength = (progress * barlength).toFixed(0)
+        const emptybarlength = barlength - fillbarlength
 
         const filledbar = get_bar(fillbarlength, " ", chalk.bgWhite)
         const emptybar = get_bar(emptybarlength, "=")
-        const percent = progress
+        const percent = `${progress.toFixed(2)}%`
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
-        process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${_progress}%`)
+        process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${percent}`)
 
         function get_bar(length, char, color = a => a) {
             let str = ""
