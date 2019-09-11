@@ -7,7 +7,7 @@ module.exports = async (rating, tags) => {
     const chalk = require("chalk")
 	mkdirp(writeDir, (err) => {
 		if(err) throw err;
-
+i
 		fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
 			headers: {
 				"User-Agent": "Yiffbox 1.0"
