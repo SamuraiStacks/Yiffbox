@@ -27,8 +27,6 @@ module.exports = async (rating, tags) => {
         const fileStream = fs.createWriteStream(path);
         await new Promise((resolve, reject) => {
         	let gotten = 0
-
-            initBar(r.headers.get("content-length"), dlpercent(gotten, r.headers.get("content-length")))
             res.body.pipe(fileStream);
             res.body.on("error", (err) => {
               reject(err);
@@ -48,28 +46,25 @@ module.exports = async (rating, tags) => {
 	    return progress = (gotten * 100) / size;
 	}
     
-    function initBar(total, progress) {
-        drawBar(0, total, progress)
-    }
     function drawBar(gotten, total, _progress) {
         const progress = gotten / total
-        const fillbarlength = (progress * (process.stdout.columns - 30)).toFixed(0)
-        const emptybarlength = (process.stdout.columns - 30) - fillbarlength
+        const fillbarlength = (progress * (process.stdout.columns - 50)).toFixed(0)
+        const emptybarlength = (process.stdout.columns - 50) - fillbarlength
 
-        const filledbar = get_bar(fillbarlength, "-")
-        const emptybar = get_bar(emptybarlength, "=")
+        const filledbar = get_bar(fillbarlength, " ")
+        const emptybar = get_bar(emptybarlength, " ")
         const percent = progress
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
         process.stdout.write(`pg: [${filledbar}${emptybar}] | percent: ${_progress}`)
-    }
 
-    function get_bar(length, char) {
-        let str = ""
-        for(let i = 0; i < length; i++) {
-            str += char;
-        }
-        return str
+        function get_bar(length, char) {
+            let str = ""
+            for(let i = 0; i < length; i++) {
+                str += char;
+            }
+            return str
+        }    
     }
 }
