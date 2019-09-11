@@ -10,7 +10,7 @@ module.exports = async (rating, tags) => {
 
 		fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
 			headers: {
-				"User-Agent": "Yiffbox 1.0"
+				"User-Agent": "Yiffbox 1.2"
 			}
 		})
 		.then(res => res.json())
@@ -56,7 +56,7 @@ module.exports = async (rating, tags) => {
 
         process.stdout.clearLine()
         process.stdout.cursorTo(0)
-        process.stdout.write(`\tDownloading [${filledbar}${emptybar}] | percent: ${percent}`)
+        process.stdout.write(`Downloading: [${filledbar}${emptybar}] ${percent}`)
 
         function get_bar(length, char, color = a => a) {
             let str = ""
