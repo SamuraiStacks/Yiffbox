@@ -1,7 +1,7 @@
 # Introduction
 Welcome to Yiffbox, an image downloader for any kinds of furry content - it's not limited to what it is named as!
 
-**PS: This is in alpha. The basic concept of the CLI is done, but there is not that much error handling or anything else. Not even the progress bar is done yet. At the current state that Yiffbox is, you should know what you are doing before using it.**
+**PS: This is in a beta stage. Core functionality is finished, and it looks decently good but there still isn't error handling and other things needed. You should know how to fix errors before using Yiffbox in the current state.**
 
 
 # Documentation
@@ -12,9 +12,11 @@ An example would be `--coolness 9000`, or `--new`
 
 Certain command flags require arguments for them. Those in `<>` are required, and others in `[]` are only needed if you want them to be.
 
+#
+
 `rating <Rating>` - The rating of content you want (Safe, Questionable, Explicit). **This is required.**
 
-`tags <Tag> [Another Tag]` - Tag(s) to use to search for. You use them if you want a specific thing. **At least 1 tag is required.**
+`tags <Tag> [Another Tag]` - Tag(s) to use to search for. You use them if you want a specific thing. **At least 1 tag is required. A max of 4.**
 
 
 # Bug Reporting
