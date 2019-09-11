@@ -53,7 +53,7 @@ module.exports = async (rating, tags) => {
         const emptybarlength = (process.stdout.columns - 60) - fillbarlength
 
         const filledbar = get_bar(fillbarlength, " ", chalk.bgWhite)
-        const emptybar = get_bar(emptybarlength, " ")
+        const emptybar = get_bar(emptybarlength, "=")
         const percent = progress
 
         process.stdout.clearLine()
