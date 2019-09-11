@@ -2,12 +2,12 @@ module.exports = async (rating, tags) => {
 	const https = require("https")
 	const fs = require("fs")
 	const fetch = require("node-fetch")
-	const writeDir = `${require('os').userInfo().homedir}\\Documents\\Yiffbox\\e621-${rating}\\${tags}`
+	const writeDir = `${require('os').userInfo().homedir}/Documents/Yiffbox/e621-${rating}/${tags}`
 	const mkdirp = require("mkdirp")
 	mkdirp(writeDir, (err) => {
 		if(err) throw err;
 
-		fetch(`https://e621.net/post/index.json?tags=${tags.join("+")}+rating:${rating}&limit=20`, {
+		fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
 			headers: {
 				"User-Agent": "Yiffbox 1.0"
 			}
@@ -15,7 +15,7 @@ module.exports = async (rating, tags) => {
 		.then(res => res.json())
 		.then(json => {
 			const t = json[Math.floor(Math.random() * json.length)]
-			download(t.file_url, `${writeDir}\\${t.id}.${t.file_ext}`)
+			download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
 		})
 	})
 
@@ -33,7 +33,8 @@ module.exports = async (rating, tags) => {
             });
             res.body.on("data", (chunk) => {
             	gotten += chunk.length
-            	dlpercent(gotten, r.headers._headers["content-length"])
+            	// console.log(r.headers.get('content-length'))
+                dlpercent(gotten, r.headers.get("content-length"))
             })
         	fileStream.on("finish", function() {
             	resolve();

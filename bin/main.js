@@ -1,7 +1,7 @@
-const optionDefinitions = [
-  { name: "rating", type: String },
-  { name: "tags", type: String, multiple: true}
-]
-const commandLineArgs = require('command-line-args')
-const options = commandLineArgs(optionDefinitions)
+#! /usr/bin/env node
+const args = process.argv.slice(2).join(" ").split("--").slice(1).map(t => t.trim().split(" "))
+let options = {}
+for(let i = 0; i < args.length; i++) {
+    options[args[i][0]] = args[i][1]
+}
 require("./src/yiffbox.js")(options)
