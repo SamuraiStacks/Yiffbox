@@ -4,7 +4,7 @@
   "description": "Easily download furry images from e621!",
   "main": "bin/main.js",
   "bin": {
-    "yiffbox": "main.js"
+    "yiffbox": "bin/main.js"
   },
   "dependencies": {
     "chalk": "^2.4.2",
