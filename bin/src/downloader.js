@@ -6,21 +6,21 @@ module.exports = async (rating, tags) => {
 	const writeDir = os.platform() === "darwin" || "linux" ? `${os.userInfo().homedir}/Documents/Yiffbox/e621/${rating}/${tags}` : `${os.userInfo().homedir}\\Documents\\Yiffbox\\e621\\${rating}\\${tags}`
 	const mkdirp = require("mkdirp")
     const chalk = require("chalk")
-	mkdirp(writeDir, (err) => {
-		if(err) throw err;
 
-		fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
-			headers: {
-				"User-Agent": "Yiffbox 1.2"
-			}
-		})
-		.then(res => res.json())
-		.then(json => {
-			const t = json[Math.floor(Math.random() * json.length)]
-			if(!t) return console.log("I could not find any images with that/those tag(s)")
-            download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
-		})
+	fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
+		headers: {
+			"User-Agent": "Yiffbox 1.2"
+		}
 	})
+	.then(res => res.json())
+	.then(json => {
+		const t = json[Math.floor(Math.random() * json.length)]
+		if(!t) return console.log("I could not find any images with that/those tag(s)")
+        mkdirp(writeDir, err => {
+            if(err) throw err;
+            download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
+        })
+    })
 
 	async function download(url, path) {
         const res = await fetch(url);
