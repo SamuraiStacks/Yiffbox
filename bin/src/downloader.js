@@ -16,7 +16,8 @@ module.exports = async (rating, tags) => {
 		.then(res => res.json())
 		.then(json => {
 			const t = json[Math.floor(Math.random() * json.length)]
-			download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
+			if(!t) return console.log("I could not find any images with that/those tag(s)")
+            download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
 		})
 	})
 
