@@ -2,7 +2,8 @@ module.exports = async (rating, tags) => {
 	const https = require("https")
 	const fs = require("fs")
 	const fetch = require("node-fetch")
-	const writeDir = `${require('os').userInfo().homedir}/Documents/Yiffbox/e621/${rating}/${tags}`
+    const os = require("os")
+	const writeDir = os.platform() === "darwin" || "linux" ? `${os.userInfo().homedir}/Documents/Yiffbox/e621/${rating}/${tags}` : `${os.userInfo().homedir}\\Documents\\Yiffbox\\e621\\${rating}\\${tags}`
 	const mkdirp = require("mkdirp")
     const chalk = require("chalk")
 	mkdirp(writeDir, (err) => {
