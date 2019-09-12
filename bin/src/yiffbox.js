@@ -1,4 +1,6 @@
 module.exports = (args) => {
+    const platforms = ["win32", "darwin", "linux"]
+    if(!platforms.includes(require("os").platform())) return console.log("Yiffbox is only supported on Windows, MacOS and Linux.")
     const ratings = ["safe", "questionable", "explicit"]
     
     if(!args.rating) return console.log("A rating argument is required. It can be used like: \"--rating safe\".")
