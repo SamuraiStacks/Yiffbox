@@ -6,5 +6,5 @@ module.exports = (args) => {
     
     if(!args.tags) return console.log("Atleast 1 tag is required. Usage: \"--tags fluffy\"")
     
-    require("./downloader,js")(args.rating, args.tags)
+    require("./downloader.js")(args.rating, args.tags)
 }
