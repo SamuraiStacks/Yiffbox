@@ -7,19 +7,19 @@ module.exports = async (rating, tags) => {
 	const mkdirp = require("mkdirp")
     const chalk = require("chalk")
 
-	fetch(`https://e621.net/post/index.json?tags=${tags.replace(" ", "+")}+rating:${rating}&limit=20`, {
+	fetch(`https://e621.net/posts.json?tags=${tags.replace(" ", "+")}&rating=${rating}&limit=20`, {
 		headers: {
-			"User-Agent": "Yiffbox 1.2"
+			"User-Agent": "Yiffbox 1.2.1"
 		}
 	})
 	.then(res => res.json())
 	.then(json => {
-		const t = json[Math.floor(Math.random() * json.length)]
+		const t = json.posts[Math.floor(Math.random() * json.posts.length)]
 		if(!t) return console.log("I could not find any images with that/those tag(s)")
-        mkdirp(writeDir, err => {
-            if(err) throw err;
-            download(t.file_url, `${writeDir}/${t.id}.${t.file_ext}`)
+        mkdirp(writeDir).then(()=>{}).catch(err => {
+            throw err;
         })
+        download(t.file.url, `${writeDir}/${t.id}.${t.file.ext}`)
     })
 
 	async function download(url, path) {

@@ -1,6 +1,6 @@
 {
   "name": "yiffbox",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Easily download furry images from e621!",
   "main": "bin/main.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.4",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamuraiStacks/Yiffbox.git"
+    "url": "git+https://github.com/Terminalfreaks/Yiffbox.git"
   },
   "keywords": [
     "image-downloader",
@@ -29,7 +29,7 @@
     "terminal",
     "command-line"
   ],
-  "author": "SamuraiStacks",
+  "author": "Terminalfreaks",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/SamuraiStacks/Yiffbox/issues"
